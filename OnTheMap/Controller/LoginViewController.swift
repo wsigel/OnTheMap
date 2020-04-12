@@ -22,11 +22,11 @@ class LoginViewController: ViewController {
     @IBAction func loginTapped(_ sender: Any) {
         setLoggingIn(true)
         let body = SessionRequest(udacity: Credentials(username: loginTextField.text ?? "", password: passwordTextField.text ?? ""))
-        OnTheMapClient.login(body: body, completion: handleRequestSessionResponse(response:error:))
+        OnTheMapClient.login(body: body, completion: handleRequestSessionResponse(success:error:))
         setLoggingIn(false)
     }
     
-    func handleRequestSessionResponse(response: SessionResponse?, error: Error?) {
+    func handleRequestSessionResponse(success: Bool, error: Error?) {
         setLoggingIn(false)
         if error != nil {
             if let error = error as? UdacityResponse {
@@ -34,7 +34,7 @@ class LoginViewController: ViewController {
             }
         }
         else {
-            // navigate to next screen
+            performSegue(withIdentifier: "completeLogin", sender: nil)
         }
     }
     

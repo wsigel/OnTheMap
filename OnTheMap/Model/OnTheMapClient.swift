@@ -14,6 +14,9 @@ class OnTheMapClient {
         static var sessionId = ""
         static var username = ""
         static var password = ""
+        static var expiration  = ""
+        static var registered = false
+        static var key = ""
     }
     
     enum Endpoints {
@@ -32,7 +35,7 @@ class OnTheMapClient {
         }
     }
     
-    class func login(body: SessionRequest, completion: @escaping (SessionResponse?, Error?)->Void){
+    class func login(body: SessionRequest, completion: @escaping (Bool, Error?)->Void){
         var request = URLRequest(url: Endpoints.getSessionId.url)
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(body)
@@ -40,7 +43,7 @@ class OnTheMapClient {
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = data else {
                 DispatchQueue.main.async {
-                    completion(nil, error)
+                    completion(false, error)
                 }
                 return
             }
@@ -51,17 +54,21 @@ class OnTheMapClient {
             do {
                 let responseObject = try decoder.decode(SessionResponse.self, from: newData)
                 DispatchQueue.main.async {
-                    completion(responseObject, nil)
+                    Auth.sessionId = responseObject.session.id
+                    Auth.expiration = responseObject.session.expiration
+                    Auth.registered = responseObject.account.registered
+                    Auth.key = responseObject.account.key
+                    completion(true, nil)
                 }
             } catch {
                 do {
                     let errorResponse = try decoder.decode(UdacityResponse.self, from: newData) as Error
                     DispatchQueue.main.async {
-                        completion(nil, errorResponse)
+                        completion(false, errorResponse)
                     }
                 } catch {
                     DispatchQueue.main.async {
-                        completion(nil, error)
+                        completion(false, error)
                     }
                 }
             }
