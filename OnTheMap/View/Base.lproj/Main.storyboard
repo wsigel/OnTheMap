@@ -20,31 +20,51 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vUu-gp-ocP">
-                                <rect key="frame" x="173" y="433" width="38" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vUu-gp-ocP">
+                                <rect key="frame" x="188" y="438" width="38" height="30"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
                                     <action selector="loginTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="O9y-RD-qTp"/>
                                 </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="jow-bX-7oi" userLabel="Activity Indicator">
-                                <rect key="frame" x="182" y="476" width="20" height="20"/>
+                                <rect key="frame" x="182" y="568" width="20" height="20"/>
                             </activityIndicatorView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="wsigel@web.de" borderStyle="roundedRect" placeholder="Enter username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yvp-bf-MxH" userLabel="LoginTextField">
                                 <rect key="frame" x="20" y="307" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4sC-vh-9KA">
+                                <rect key="frame" x="90.5" y="476" width="233" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D71-er-HP6">
+                                        <rect key="frame" x="0.0" y="0.0" width="179" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJ4-NC-8Uz" userLabel="Sign Up Button">
+                                        <rect key="frame" x="179" y="0.0" width="54" height="30"/>
+                                        <state key="normal" title="Sign Up"/>
+                                        <connections>
+                                            <action selector="signUpButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SYa-bB-vQb"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="4sC-vh-9KA" firstAttribute="top" secondItem="vUu-gp-ocP" secondAttribute="bottom" constant="8" id="0Fj-W2-MbZ"/>
                             <constraint firstItem="vUu-gp-ocP" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="0I5-nm-ghz"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hhV-IK-ULd" secondAttribute="trailing" constant="20" id="0Jq-LL-cX9"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="yvp-bf-MxH" secondAttribute="trailing" constant="20" id="3TS-KF-c7h"/>
                             <constraint firstItem="vUu-gp-ocP" firstAttribute="top" secondItem="hhV-IK-ULd" secondAttribute="bottom" constant="24" id="NA9-Au-T1M"/>
+                            <constraint firstItem="4sC-vh-9KA" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Pvn-ER-5U5"/>
                             <constraint firstItem="yvp-bf-MxH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="bL4-9C-8Jy"/>
                             <constraint firstItem="vUu-gp-ocP" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="d0S-mA-LBx"/>
-                            <constraint firstItem="jow-bX-7oi" firstAttribute="top" secondItem="vUu-gp-ocP" secondAttribute="bottom" constant="8" id="ere-BG-oGU"/>
+                            <constraint firstItem="jow-bX-7oi" firstAttribute="top" secondItem="vUu-gp-ocP" secondAttribute="bottom" constant="100" id="ere-BG-oGU"/>
                             <constraint firstItem="hhV-IK-ULd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="k3f-my-2Su"/>
                             <constraint firstItem="hhV-IK-ULd" firstAttribute="top" secondItem="yvp-bf-MxH" secondAttribute="bottom" constant="39" id="oJq-bP-tes"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jow-bX-7oi" secondAttribute="trailing" constant="212" id="q0c-5G-wP6"/>
@@ -63,7 +83,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-181" y="189"/>
+            <point key="canvasLocation" x="-181.15942028985509" y="188.83928571428569"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="QK2-op-ldR">

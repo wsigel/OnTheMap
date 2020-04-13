@@ -23,10 +23,12 @@ class OnTheMapClient {
         static let base = "https://onthemap-api.udacity.com/v1"
         
         case getSessionId
+        case signUpUdacity
         
         var stringValue: String {
             switch self {
             case .getSessionId: return Endpoints.base + "/session"
+            case .signUpUdacity: return "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com/authenticated"
             }
         }
         

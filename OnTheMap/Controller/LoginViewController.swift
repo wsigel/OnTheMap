@@ -19,6 +19,10 @@ class LoginViewController: ViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     
     
+    @IBAction func signUpButtonTapped(_ sender: Any) {
+        UIApplication.shared.open(OnTheMapClient.Endpoints.signUpUdacity.url, options: [:], completionHandler: nil)
+    }
+    
     @IBAction func loginTapped(_ sender: Any) {
         setLoggingIn(true)
         let body = SessionRequest(udacity: Credentials(username: loginTextField.text ?? "", password: passwordTextField.text ?? ""))
