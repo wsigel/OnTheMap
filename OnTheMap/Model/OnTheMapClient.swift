@@ -24,17 +24,44 @@ class OnTheMapClient {
         
         case getSessionId
         case signUpUdacity
+        case getStudentLocations
         
         var stringValue: String {
             switch self {
             case .getSessionId: return Endpoints.base + "/session"
             case .signUpUdacity: return "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com/authenticated"
+            case .getStudentLocations: return Endpoints.base + "/StudentLocation?limit=100&order=-updatedAt"
             }
         }
         
         var url: URL {
             return URL(string: stringValue)!
         }
+    }
+    
+    class func getStudentLocations(completion: @escaping(StudentRequest?, Error?) -> Void) {
+        let task = URLSession.shared.dataTask(with: Endpoints.getStudentLocations.url) { (data, response, error) in
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
+                return
+            }
+            let decoder = JSONDecoder()
+            do {
+                print(String(data: data, encoding: .utf8))
+                let responseObject = try decoder.decode(StudentRequest.self, from: data)
+                print(responseObject)
+                DispatchQueue.main.async {
+                    completion(responseObject, nil)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
+            }
+        }
+        task.resume()
     }
     
     class func login(body: SessionRequest, completion: @escaping (Bool, Error?)->Void){
