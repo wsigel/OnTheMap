@@ -13,7 +13,7 @@ import MapKit
 class MapViewController: UIViewController {
      
     @IBOutlet weak var mapView: MKMapView!
-    var students: [Student] = []
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +25,8 @@ class MapViewController: UIViewController {
         if error != nil {
             // show error message
         } else {
-            if let students = students?.results {
-                self.students = students
+            if let students = students {
+                StudentCollection.students = students.results
             }
         }
     }

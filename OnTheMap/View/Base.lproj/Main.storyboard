@@ -134,7 +134,7 @@
         <!--Add Location-->
         <scene sceneID="QM7-iH-DJg">
             <objects>
-                <navigationController title="Add Location" id="OCs-Pv-a7F" sceneMemberID="viewController">
+                <navigationController id="OCs-Pv-a7F" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="Add Location" id="0eF-gx-Xvh">
                         <barButtonItem key="backBarButtonItem" title="Cancel" id="FL1-7F-pOf"/>
                     </navigationItem>
