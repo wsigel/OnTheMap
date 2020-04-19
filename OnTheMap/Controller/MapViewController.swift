@@ -15,16 +15,13 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     var annotations = [MKPointAnnotation]()
     
-    var studentLocationMapViewDelgate: MKMapViewDelegate = StudentLocationMapViewDelegate()
+    var studentInformationMapViewDelgate: MKMapViewDelegate = StudentInformationMapViewDelegate()
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         OnTheMapClient.getStudentLocations(completion: handleStudentRequest(students:error:))
-        self.mapView.delegate = studentLocationMapViewDelgate
-        //getStudentInformation()
-        
-        
+        self.mapView.delegate = studentInformationMapViewDelgate
     }
     
     func handleStudentRequest(students: StudentRequest?, error: Error?){

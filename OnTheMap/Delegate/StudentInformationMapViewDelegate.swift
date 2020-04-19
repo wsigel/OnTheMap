@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-class StudentLocationMapViewDelegate: NSObject, MKMapViewDelegate {
+class StudentInformationMapViewDelegate: NSObject, MKMapViewDelegate {
     
     
     
