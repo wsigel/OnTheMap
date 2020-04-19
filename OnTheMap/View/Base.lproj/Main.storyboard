@@ -85,12 +85,16 @@
             </objects>
             <point key="canvasLocation" x="-1055" y="155"/>
         </scene>
-        <!--On the Map-->
+        <!--On the Map Tab Bar Controller-->
         <scene sceneID="QK2-op-ldR">
             <objects>
-                <tabBarController id="vA3-iR-WAQ" sceneMemberID="viewController">
+                <tabBarController id="vA3-iR-WAQ" userLabel="On the Map Tab Bar Controller" customClass="OnTheMapTabBarController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="On the Map" id="oUA-ih-8d5">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="7iH-Sw-nNQ"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="7iH-Sw-nNQ">
+                            <connections>
+                                <action selector="logoutButtonTapped:" destination="vA3-iR-WAQ" id="5LY-xN-oA5"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem image="plus" catalog="system" id="SMm-fK-l9e" userLabel="Information Posting Bar Button Item">
                                 <connections>

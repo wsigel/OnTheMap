@@ -37,7 +37,6 @@ class MapViewController: UIViewController {
     }
     
     func getStudentInformation() -> Void {
-        print("Studenten: \(StudentCollection.students.count)")
         for student in StudentCollection.students {
             let lat = CLLocationDegrees(student.latitude)
             let long = CLLocationDegrees(student.longitude)
@@ -54,6 +53,5 @@ class MapViewController: UIViewController {
             
             self.annotations.append(annotation)
         }
-        print("Anzahl: \(annotations.count)")
     }
 }
