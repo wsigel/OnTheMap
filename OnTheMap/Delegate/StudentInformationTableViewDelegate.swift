@@ -16,7 +16,7 @@ class StudentInformationTableViewDelegate: NSObject, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "StudentInformationCell") as? UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "StudentInformationCell")
         let studentInformation = StudentCollection.students[indexPath.row]
         cell?.imageView?.image = UIImage(named: "icon_pin")
         cell?.textLabel?.text = studentInformation.firstName + " " + studentInformation.lastName
@@ -25,6 +25,9 @@ class StudentInformationTableViewDelegate: NSObject, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let studentInformation = StudentCollection.students[indexPath.row] as StudentInformation
+        DispatchQueue.main.async {
+            UIApplication.shared.open(URL(string: studentInformation.mediaURL)!, options: [:], completionHandler: nil)
+        }
     }
 }
