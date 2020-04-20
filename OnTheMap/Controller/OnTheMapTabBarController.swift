@@ -12,12 +12,26 @@ import UIKit
 class OnTheMapTabBarController: UITabBarController {
     
     @IBAction func logoutButtonTapped(_ sender: Any) {
-        dismiss(animated: true) {
-            OnTheMapClient.Auth.sessionId = ""
-            OnTheMapClient.Auth.registered = false
-            OnTheMapClient.Auth.key = ""
-            OnTheMapClient.Auth.expiration = ""
+        OnTheMapClient.deleteSession(completion: handleDeleteSessionResponse(response:error:))
+    }
+    
+    func handleDeleteSessionResponse(response: LogoutResponse?, error: Error?) -> Void {
+        if error != nil {
+            showLogoutFailure()
+        } else {
+            dismiss(animated: true) {
+                OnTheMapClient.Auth.sessionId = ""
+                OnTheMapClient.Auth.registered = false
+                OnTheMapClient.Auth.key = ""
+                OnTheMapClient.Auth.expiration = ""
+            }
         }
+    }
+    
+    func showLogoutFailure() {
+        let alertVC = UIAlertController(title: "Logout failure", message: "Error encountered on deleting the session", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        show(alertVC, sender: nil)
     }
 }
  
