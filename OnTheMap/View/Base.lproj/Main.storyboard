@@ -162,28 +162,53 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FDh-It-YRk">
-                                <rect key="frame" x="161" y="406" width="92" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FDh-It-YRk">
+                                <rect key="frame" x="161" y="417" width="92" height="30"/>
                                 <state key="normal" title="Find Location"/>
                                 <connections>
                                     <action selector="findLocationButtonTapped:" destination="SX0-w9-Gmm" eventType="touchUpInside" id="dBF-Rd-Q0e"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mwk-OJ-R6s" userLabel="Enter URL Text Field">
-                                <rect key="frame" x="20" y="349" width="374" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mwk-OJ-R6s" userLabel="Enter URL Text Field">
+                                <rect key="frame" x="20" y="313" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hHb-gi-rbU" userLabel="Enter Location Text Field">
-                                <rect key="frame" x="20" y="289" width="374" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hHb-gi-rbU" userLabel="Enter Location Text Field">
+                                <rect key="frame" x="20" y="273" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Ryk-QK-xRq" userLabel="Add Location Medium Activity Indicator">
+                                <rect key="frame" x="197" y="367" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Kk5-Gf-vIl" userLabel="New Location Map View">
+                                <rect key="frame" x="20" y="455" width="374" height="315"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iw6-ON-pAe">
+                                <rect key="frame" x="187" y="778" width="41" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Finish"/>
+                                <connections>
+                                    <action selector="finishButtonTapped:" destination="SX0-w9-Gmm" eventType="touchUpInside" id="gEA-Sd-H6l"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="FDh-It-YRk" firstAttribute="centerY" secondItem="q8v-fE-SvB" secondAttribute="centerY" id="0Yg-mL-eiu"/>
+                            <constraint firstItem="q8v-fE-SvB" firstAttribute="trailing" secondItem="hHb-gi-rbU" secondAttribute="trailing" constant="20" id="0mi-LP-KB7"/>
+                            <constraint firstItem="hHb-gi-rbU" firstAttribute="leading" secondItem="q8v-fE-SvB" secondAttribute="leading" constant="20" id="1Yh-xa-b3m"/>
+                            <constraint firstItem="q8v-fE-SvB" firstAttribute="trailing" secondItem="Ryk-QK-xRq" secondAttribute="trailing" constant="197" id="3In-Iy-BHv"/>
+                            <constraint firstItem="FDh-It-YRk" firstAttribute="top" secondItem="Ryk-QK-xRq" secondAttribute="bottom" constant="30" id="4a3-Ij-bWV"/>
+                            <constraint firstItem="FDh-It-YRk" firstAttribute="top" secondItem="hHb-gi-rbU" secondAttribute="bottom" constant="110" id="VfE-ER-8Zu"/>
+                            <constraint firstItem="Mwk-OJ-R6s" firstAttribute="leading" secondItem="q8v-fE-SvB" secondAttribute="leading" constant="20" id="dnM-BM-EmI"/>
+                            <constraint firstItem="q8v-fE-SvB" firstAttribute="trailing" secondItem="Mwk-OJ-R6s" secondAttribute="trailing" constant="20" id="f6z-bv-GYy"/>
+                            <constraint firstItem="Ryk-QK-xRq" firstAttribute="leading" secondItem="q8v-fE-SvB" secondAttribute="leading" constant="197" id="gU7-J8-mqs"/>
+                            <constraint firstItem="FDh-It-YRk" firstAttribute="centerX" secondItem="q8v-fE-SvB" secondAttribute="centerX" id="jo4-tZ-YH1"/>
+                            <constraint firstItem="FDh-It-YRk" firstAttribute="top" secondItem="Mwk-OJ-R6s" secondAttribute="bottom" constant="70" id="tXZ-GD-rG0"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="q8v-fE-SvB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add Location" id="sWB-2r-cih">
@@ -194,6 +219,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addLocationActivityIndicator" destination="Ryk-QK-xRq" id="eNh-gb-jmu"/>
+                        <outlet property="addLocationMapView" destination="Kk5-Gf-vIl" id="16Q-HK-5Va"/>
+                        <outlet property="finishButton" destination="Iw6-ON-pAe" id="WJL-q4-cQ6"/>
                         <outlet property="locationTextField" destination="hHb-gi-rbU" id="qP5-9x-QbG"/>
                         <outlet property="urlTextField" destination="Mwk-OJ-R6s" id="TCR-aC-nxH"/>
                     </connections>
