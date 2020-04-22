@@ -12,7 +12,9 @@ class OnTheMapClient {
     
     struct Auth {
         static var sessionId = ""
-        static var username = ""
+        // dummy username
+        static var firstName = "Frank"
+        static var lastName = "Zappa"
         static var password = ""
         static var expiration  = ""
         static var registered = false
@@ -26,6 +28,7 @@ class OnTheMapClient {
         case signUpUdacity
         case getStudentLocations
         case deleteSession
+        case createStudentLocation
         
         var stringValue: String {
             switch self {
@@ -33,12 +36,47 @@ class OnTheMapClient {
             case .signUpUdacity: return "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com/authenticated"
             case .getStudentLocations: return Endpoints.base + "/StudentLocation?limit=100&order=-updatedAt"
             case .deleteSession: return Endpoints.base + "/session"
+            case .createStudentLocation: return Endpoints.base + "/StudentLocation"
             }
         }
         
         var url: URL {
             return URL(string: stringValue)!
         }
+    }
+    
+    class func createStudentLocation(studentInformation: StudentInformation, url: URL, completion: @escaping (CreateStudentLocationResponse?, Error?) -> Void) {
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        let encoder = JSONEncoder()
+        do{
+            let body = try encoder.encode(studentInformation)
+            request.httpBody = body
+        } catch {
+            completion(nil, error)
+        }
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { (data, response, error) in
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
+                return
+            }
+            let decoder = JSONDecoder()
+            do{
+                let responseObject = try decoder.decode(CreateStudentLocationResponse.self, from: data)
+                DispatchQueue.main.async {
+                    completion(responseObject, nil)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
+            }
+        }
+        task.resume()
     }
     
     class func deleteSession(completion: @escaping(LogoutResponse?, Error?) -> Void) {

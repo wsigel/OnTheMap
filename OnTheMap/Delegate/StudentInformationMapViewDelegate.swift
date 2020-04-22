@@ -36,7 +36,6 @@ class StudentInformationMapViewDelegate: NSObject, MKMapViewDelegate {
             let app = UIApplication.shared
             if let toOpen = view.annotation?.subtitle! {
                 app.open(URL(string: toOpen)!, options: [:], completionHandler: nil)
-                //app.openURL(URL(string: toOpen)!)
             }
         }
     }
