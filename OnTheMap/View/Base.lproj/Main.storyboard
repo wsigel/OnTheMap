@@ -27,8 +27,9 @@
                                     <action selector="loginTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="O9y-RD-qTp"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="jow-bX-7oi" userLabel="Activity Indicator">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="jow-bX-7oi" userLabel="Activity Indicator">
                                 <rect key="frame" x="182" y="568" width="20" height="20"/>
+                                <color key="color" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                             </activityIndicatorView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="wsigel@web.de" borderStyle="roundedRect" placeholder="Enter username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yvp-bf-MxH" userLabel="LoginTextField">
                                 <rect key="frame" x="20" y="307" width="374" height="34"/>
@@ -162,52 +163,61 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FDh-It-YRk">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Kk5-Gf-vIl" userLabel="New Location Map View">
+                                <rect key="frame" x="0.0" y="56" width="414" height="752"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iug-Ln-PpT" userLabel="Find Location Button">
                                 <rect key="frame" x="161" y="417" width="92" height="30"/>
                                 <state key="normal" title="Find Location"/>
                                 <connections>
-                                    <action selector="findLocationButtonTapped:" destination="SX0-w9-Gmm" eventType="touchUpInside" id="dBF-Rd-Q0e"/>
+                                    <action selector="findLocationButtonTapped:" destination="SX0-w9-Gmm" eventType="touchUpInside" id="gfq-aM-Fb3"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mwk-OJ-R6s" userLabel="Enter URL Text Field">
-                                <rect key="frame" x="20" y="313" width="374" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Location (mandatory)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dsg-QJ-8xM" userLabel="Location Text Field">
+                                <rect key="frame" x="20" y="231" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hHb-gi-rbU" userLabel="Enter Location Text Field">
-                                <rect key="frame" x="20" y="273" width="374" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter URL (optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ze8-XM-jrg" userLabel="Url Text Field">
+                                <rect key="frame" x="20" y="303" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Ryk-QK-xRq" userLabel="Add Location Medium Activity Indicator">
-                                <rect key="frame" x="197" y="367" width="20" height="20"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="onr-Nn-9Zd">
+                                <rect key="frame" x="197" y="485" width="20" height="20"/>
+                                <color key="color" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                             </activityIndicatorView>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Kk5-Gf-vIl" userLabel="New Location Map View">
-                                <rect key="frame" x="20" y="455" width="374" height="315"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iw6-ON-pAe">
-                                <rect key="frame" x="187" y="778" width="41" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Finish"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RzJ-Z8-K8h">
+                                <rect key="frame" x="20" y="757" width="374" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Finish">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
-                                    <action selector="finishButtonTapped:" destination="SX0-w9-Gmm" eventType="touchUpInside" id="gEA-Sd-H6l"/>
+                                    <action selector="finishButtonTapped:" destination="SX0-w9-Gmm" eventType="touchUpInside" id="4hX-ed-6Hp"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="FDh-It-YRk" firstAttribute="centerY" secondItem="q8v-fE-SvB" secondAttribute="centerY" id="0Yg-mL-eiu"/>
-                            <constraint firstItem="q8v-fE-SvB" firstAttribute="trailing" secondItem="hHb-gi-rbU" secondAttribute="trailing" constant="20" id="0mi-LP-KB7"/>
-                            <constraint firstItem="hHb-gi-rbU" firstAttribute="leading" secondItem="q8v-fE-SvB" secondAttribute="leading" constant="20" id="1Yh-xa-b3m"/>
-                            <constraint firstItem="q8v-fE-SvB" firstAttribute="trailing" secondItem="Ryk-QK-xRq" secondAttribute="trailing" constant="197" id="3In-Iy-BHv"/>
-                            <constraint firstItem="FDh-It-YRk" firstAttribute="top" secondItem="Ryk-QK-xRq" secondAttribute="bottom" constant="30" id="4a3-Ij-bWV"/>
-                            <constraint firstItem="FDh-It-YRk" firstAttribute="top" secondItem="hHb-gi-rbU" secondAttribute="bottom" constant="110" id="VfE-ER-8Zu"/>
-                            <constraint firstItem="Mwk-OJ-R6s" firstAttribute="leading" secondItem="q8v-fE-SvB" secondAttribute="leading" constant="20" id="dnM-BM-EmI"/>
-                            <constraint firstItem="q8v-fE-SvB" firstAttribute="trailing" secondItem="Mwk-OJ-R6s" secondAttribute="trailing" constant="20" id="f6z-bv-GYy"/>
-                            <constraint firstItem="Ryk-QK-xRq" firstAttribute="leading" secondItem="q8v-fE-SvB" secondAttribute="leading" constant="197" id="gU7-J8-mqs"/>
-                            <constraint firstItem="FDh-It-YRk" firstAttribute="centerX" secondItem="q8v-fE-SvB" secondAttribute="centerX" id="jo4-tZ-YH1"/>
-                            <constraint firstItem="FDh-It-YRk" firstAttribute="top" secondItem="Mwk-OJ-R6s" secondAttribute="bottom" constant="70" id="tXZ-GD-rG0"/>
+                            <constraint firstItem="Kk5-Gf-vIl" firstAttribute="bottom" secondItem="q8v-fE-SvB" secondAttribute="bottom" id="9qF-qY-vNa"/>
+                            <constraint firstItem="onr-Nn-9Zd" firstAttribute="top" secondItem="iug-Ln-PpT" secondAttribute="bottom" constant="38" id="Aom-GU-GbU"/>
+                            <constraint firstItem="Kk5-Gf-vIl" firstAttribute="leading" secondItem="q8v-fE-SvB" secondAttribute="leading" id="FIe-x5-egs"/>
+                            <constraint firstItem="iug-Ln-PpT" firstAttribute="centerX" secondItem="q8v-fE-SvB" secondAttribute="centerX" id="Hs9-PB-nXI"/>
+                            <constraint firstItem="Kk5-Gf-vIl" firstAttribute="top" secondItem="q8v-fE-SvB" secondAttribute="top" id="JtP-9X-Kj9"/>
+                            <constraint firstItem="RzJ-Z8-K8h" firstAttribute="leading" secondItem="q8v-fE-SvB" secondAttribute="leading" constant="20" id="OCI-bX-HWc"/>
+                            <constraint firstItem="q8v-fE-SvB" firstAttribute="bottom" secondItem="RzJ-Z8-K8h" secondAttribute="bottom" constant="21" id="SKH-x5-U1d"/>
+                            <constraint firstItem="q8v-fE-SvB" firstAttribute="trailing" secondItem="Kk5-Gf-vIl" secondAttribute="trailing" id="eik-nF-MvB"/>
+                            <constraint firstItem="q8v-fE-SvB" firstAttribute="trailing" secondItem="onr-Nn-9Zd" secondAttribute="trailing" constant="197" id="fGx-XP-Wht"/>
+                            <constraint firstItem="ze8-XM-jrg" firstAttribute="top" secondItem="dsg-QJ-8xM" secondAttribute="bottom" constant="38" id="lqN-9y-7xj"/>
+                            <constraint firstItem="q8v-fE-SvB" firstAttribute="trailing" secondItem="RzJ-Z8-K8h" secondAttribute="trailing" constant="20" id="meC-Cc-4v7"/>
+                            <constraint firstItem="q8v-fE-SvB" firstAttribute="trailing" secondItem="ze8-XM-jrg" secondAttribute="trailing" constant="20" id="meZ-ND-QEQ"/>
+                            <constraint firstItem="onr-Nn-9Zd" firstAttribute="leading" secondItem="q8v-fE-SvB" secondAttribute="leading" constant="197" id="ubh-Ks-VSk"/>
+                            <constraint firstItem="q8v-fE-SvB" firstAttribute="trailing" secondItem="dsg-QJ-8xM" secondAttribute="trailing" constant="20" id="uec-ag-Tws"/>
+                            <constraint firstItem="iug-Ln-PpT" firstAttribute="centerY" secondItem="q8v-fE-SvB" secondAttribute="centerY" id="wRG-Ef-BCh"/>
+                            <constraint firstItem="ze8-XM-jrg" firstAttribute="leading" secondItem="q8v-fE-SvB" secondAttribute="leading" constant="20" id="xwJ-w4-rVS"/>
+                            <constraint firstItem="dsg-QJ-8xM" firstAttribute="leading" secondItem="q8v-fE-SvB" secondAttribute="leading" constant="20" id="zIk-nD-B6O"/>
+                            <constraint firstItem="iug-Ln-PpT" firstAttribute="top" secondItem="ze8-XM-jrg" secondAttribute="bottom" constant="80" id="zUi-Nr-dJd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="q8v-fE-SvB"/>
                     </view>
@@ -219,11 +229,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addLocationActivityIndicator" destination="Ryk-QK-xRq" id="eNh-gb-jmu"/>
+                        <outlet property="addLocationActivityIndicator" destination="onr-Nn-9Zd" id="aAY-EK-TFb"/>
                         <outlet property="addLocationMapView" destination="Kk5-Gf-vIl" id="16Q-HK-5Va"/>
-                        <outlet property="finishButton" destination="Iw6-ON-pAe" id="WJL-q4-cQ6"/>
-                        <outlet property="locationTextField" destination="hHb-gi-rbU" id="qP5-9x-QbG"/>
-                        <outlet property="urlTextField" destination="Mwk-OJ-R6s" id="TCR-aC-nxH"/>
+                        <outlet property="findLocationButton" destination="iug-Ln-PpT" id="Yya-2Q-trt"/>
+                        <outlet property="finishButton" destination="RzJ-Z8-K8h" id="TDl-qc-CkC"/>
+                        <outlet property="locationTextField" destination="dsg-QJ-8xM" id="nlR-JU-jcm"/>
+                        <outlet property="urlTextField" destination="ze8-XM-jrg" id="GKk-Iq-Pxy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAr-wU-b3I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -241,6 +252,11 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Qj3-G7-upg">
                                 <rect key="frame" x="0.0" y="56" width="414" height="703"/>
                             </mapView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="qVo-FD-Wa9">
+                                <rect key="frame" x="198" y="398" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -254,6 +270,7 @@
                     <tabBarItem key="tabBarItem" title="" image="icon_mapview-deselected" id="F1x-cw-7s6"/>
                     <navigationItem key="navigationItem" id="9bT-UP-4HQ"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="qVo-FD-Wa9" id="aCl-4i-GlS"/>
                         <outlet property="mapView" destination="Qj3-G7-upg" id="Lzn-fu-99h"/>
                     </connections>
                 </viewController>
@@ -305,7 +322,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2T0-eI-aMa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1535" y="645"/>
+            <point key="canvasLocation" x="1534.7826086956522" y="644.86607142857144"/>
         </scene>
     </scenes>
     <resources>

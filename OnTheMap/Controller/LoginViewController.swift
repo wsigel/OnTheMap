@@ -24,14 +24,19 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginTapped(_ sender: Any) {
-        setLoggingIn(true)
+        DispatchQueue.main.async {
+            self.setLoggingIn(true)
+        }
+        
         let body = SessionRequest(udacity: Credentials(username: loginTextField.text ?? "", password: passwordTextField.text ?? ""))
         OnTheMapClient.login(body: body, completion: handleRequestSessionResponse(success:error:))
         setLoggingIn(false)
     }
     
     func handleRequestSessionResponse(success: Bool, error: Error?) {
-        setLoggingIn(false)
+        DispatchQueue.main.async {
+            self.setLoggingIn(false)
+        }
         if error != nil {
             if let error = error as? UdacityResponse {
                 showLoginFailure(message: error.localizedDescription)

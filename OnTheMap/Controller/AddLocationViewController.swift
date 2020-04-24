@@ -13,6 +13,7 @@ import CoreLocation
 
 class AddLocationViewController: UIViewController {
     
+    @IBOutlet weak var findLocationButton: UIButton!
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var addLocationActivityIndicator: UIActivityIndicatorView!
@@ -25,8 +26,9 @@ class AddLocationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addLocationMapView.delegate = addLocationMapViewDelegate
-        
+        displayMap(showing: false)
     }
+    
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -39,6 +41,7 @@ class AddLocationViewController: UIViewController {
     }
     
     func handleCreateStudentLocationResponse(response: CreateStudentLocationResponse?, error: Error?) {
+        showActivityIndicator(show: false)
         if error == nil {
             if let response = response {
                 print( response)
@@ -68,7 +71,10 @@ class AddLocationViewController: UIViewController {
     }
     
     @IBAction func findLocationButtonTapped(_ sender: Any) {
-        showActivityIndicator(show: true)
+//        DispatchQueue.main.async {
+//            self.showActivityIndicator(show: true)
+//        }
+        self.showActivityIndicator(show: true)
         guard let locationText = self.locationTextField.text else {
             return
         }
@@ -88,10 +94,30 @@ class AddLocationViewController: UIViewController {
                     annotation.subtitle = self.urlTextField.text!
                     
                     self.addLocationMapView.addAnnotation(annotation)
+                    self.displayMap(showing: true)
                 }
             }
+            
+                        self.showActivityIndicator(show: false)
+                    
         }
-        showActivityIndicator(show: false)
+
+    }
+    
+    func displayMap(showing: Bool){
+        if showing {
+            self.addLocationMapView.isHidden = false
+            self.finishButton.isHidden = false
+            self.findLocationButton.isHidden = true
+            self.locationTextField.isHidden = true
+            self.urlTextField.isHidden = true
+        } else {
+            self.addLocationMapView.isHidden = true
+            self.finishButton.isHidden = true
+            self.findLocationButton.isHidden = false
+            self.locationTextField.isHidden = false
+            self.urlTextField.isHidden = false
+        }
     }
     
     func showActivityIndicator(show: Bool) -> Void {

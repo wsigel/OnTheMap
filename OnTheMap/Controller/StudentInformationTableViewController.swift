@@ -11,6 +11,7 @@ import UIKit
 
 class StudentInformationTableViewController: UITableViewController {
     
+    
     var studentInformationTableViewDelegate = StudentInformationTableViewDelegate()
     
     override func viewDidLoad() {
