@@ -20,10 +20,11 @@ class AddLocationViewController: UIViewController {
     @IBOutlet weak var addLocationMapView: MKMapView!
     
     var locationCoordinates: CLLocationCoordinate2D?
-    
+    var addLocationMapViewDelegate: AddLocationMapViewDelegate = AddLocationMapViewDelegate()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.addLocationMapView.delegate = addLocationMapViewDelegate
         
     }
     
