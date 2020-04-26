@@ -46,19 +46,15 @@ class AddLocationViewController: UIViewController {
     func handleCreateStudentLocationResponse(response: CreateStudentLocationResponse?, error: Error?) {
         showActivityIndicator(show: false)
         if error == nil {
-            if let response = response {
-                self.navigationController?.popViewController(animated: true)
+            if response != nil {
+                dismiss(animated: true, completion: nil)
             }
         } else {
-            showGeocodingFailure(message: "Error retrieving coordinates")
+            let ac = ErrorAlertController.createAlertController(title: "Geocoding failure", message: "Error retrieving coordinates")
+            self.present(ac, animated: true, completion: nil)
         }
     }
     
-    func showGeocodingFailure(message: String){
-        let alertVC = UIAlertController(title: "Geocoding failure", message: message, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        show(alertVC, sender: nil)
-    }
     
     
     func createStudentInformation() -> StudentInformation? {
@@ -88,21 +84,32 @@ class AddLocationViewController: UIViewController {
             return
         }
         let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(locationText) { (placemarks, error) in
-            if let placemark = placemarks?.first {
+        geocoder.geocodeAddressString(locationText, completionHandler: handleGeocodingAddressString(placemarks:error:))
+    }
+    
+    func handleGeocodingAddressString(placemarks: [CLPlacemark]?, error: Error?) -> Void {
+        self.showActivityIndicator(show: false)
+        if error != nil {
+            let ac = ErrorAlertController.createAlertController(title: "Geocoding failure", message: "Unable to retrieve coordinates for given location")
+            self.present(ac, animated: true)
+        }
+        guard let placemarks = placemarks else {
+            return
+        }
+        if placemarks.count >= 1 {
+            if let placemark = placemarks.first {
                 if let locationCoordinates: CLLocationCoordinate2D = placemark.location?.coordinate {
-                    self.locationCoordinates = locationCoordinates
-                    let coordinateRegion = MKCoordinateRegion(center: locationCoordinates, span: MKCoordinateSpan(latitudeDelta: 15.0, longitudeDelta: 15.0))
-                    self.addLocationMapView.setRegion(coordinateRegion, animated: true)
-                    let annotation = MKPointAnnotation()
-                    annotation.coordinate = locationCoordinates
-                    annotation.title = OnTheMapClient.Auth.firstName + " " + OnTheMapClient.Auth.lastName
-                    annotation.subtitle = self.urlTextField.text!
-                    self.addLocationMapView.addAnnotation(annotation)
-                    self.displayMap(showing: true)
+                self.locationCoordinates = locationCoordinates
+                let coordinateRegion = MKCoordinateRegion(center: locationCoordinates, span: MKCoordinateSpan(latitudeDelta: 15.0, longitudeDelta: 15.0))
+                self.addLocationMapView.setRegion(coordinateRegion, animated: true)
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = locationCoordinates
+                annotation.title = OnTheMapClient.Auth.firstName + " " + OnTheMapClient.Auth.lastName
+                annotation.subtitle = self.urlTextField.text!
+                self.addLocationMapView.addAnnotation(annotation)
+                self.displayMap(showing: true)
                 }
             }
-            self.showActivityIndicator(show: false)
         }
     }
     

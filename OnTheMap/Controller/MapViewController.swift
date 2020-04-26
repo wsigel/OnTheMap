@@ -22,11 +22,6 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        DispatchQueue.main.async {
-//            self.showActivityIndicator(searching: true)
-//        }
-//        
-//        OnTheMapClient.getStudentLocations(completion: handleStudentRequest(students:error:))
         self.mapView.delegate = studentInformationMapViewDelgate
         NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: Notification.Name.init(rawValue: "RefreshData"), object: nil)
         
@@ -37,7 +32,6 @@ class MapViewController: UIViewController {
         DispatchQueue.main.async {
             self.showActivityIndicator(searching: true)
         }
-        
         OnTheMapClient.getStudentLocations(completion: handleStudentRequest(students:error:))
     }
     
@@ -62,7 +56,8 @@ class MapViewController: UIViewController {
             self.showActivityIndicator(searching: false)
         }
         if error != nil {
-            showRetrievalFailure(message: "Error retrieving Student Locations")
+            let ac = ErrorAlertController.createAlertController(title: "Retrieval failure", message: "An error occured getting student locations")
+            self.present(ac, animated: true)
         } else {
             if let students = students {
                 StudentCollection.students = students.results
@@ -72,11 +67,6 @@ class MapViewController: UIViewController {
         }
     }
     
-    func showRetrievalFailure(message: String) {
-        let alertVC = UIAlertController(title: "Retrieval failure", message: message, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        show(alertVC, sender: nil)
-    }
     
     func getStudentInformation() -> Void {
         for student in StudentCollection.students {

@@ -39,18 +39,13 @@ class LoginViewController: UIViewController {
         }
         if error != nil {
             if let error = error as? UdacityResponse {
-                showLoginFailure(message: error.localizedDescription)
+                let ac = ErrorAlertController.createAlertController(title: "Login failure", message: error.localizedDescription)
+                self.present(ac, animated: true)
             }
         }
         else {
             performSegue(withIdentifier: "completeLogin", sender: nil)
         }
-    }
-    
-    func showLoginFailure(message: String) {
-        let alertVC = UIAlertController(title: "Login failure", message: message, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        show(alertVC, sender: nil)
     }
     
     

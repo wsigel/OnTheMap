@@ -8,6 +8,7 @@
 
 import Foundation
 import MapKit
+import UIKit
 
 class AddLocationMapViewDelegate: NSObject, MKMapViewDelegate {
     

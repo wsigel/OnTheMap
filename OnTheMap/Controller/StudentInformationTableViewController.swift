@@ -23,13 +23,17 @@ class StudentInformationTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-
+        tableView.reloadData()
+    }
+    
+    @objc func refreshData(){
+           OnTheMapClient.getStudentLocations(completion: handleRefreshResponse(students:error:))
     }
     
     func handleRefreshResponse(students: StudentRequest?, error: Error?){
         if error != nil {
-            showRetrievalFailure(message: "Error retrieving Student Locations")
+            let ac = ErrorAlertController.createAlertController(title: "Retrieval failure", message: "An error occured while refreshing student locations")
+            self.present(ac, animated: true, completion: nil)
         } else {
             if let students = students {
                 StudentCollection.students.removeAll()
@@ -37,16 +41,5 @@ class StudentInformationTableViewController: UITableViewController {
                 tableView.reloadData()
             }
         }
-    }
-    
-    func showRetrievalFailure(message: String) {
-        let alertVC = UIAlertController(title: "Retrieval failure", message: message, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        show(alertVC, sender: nil)
-    }
-    
-    @objc func refreshData(){
-        OnTheMapClient.getStudentLocations(completion: handleRefreshResponse(students:error:))
-        print("refresh from tableviewcontroller")
     }
 }

@@ -21,7 +21,7 @@ class OnTheMapTabBarController: UITabBarController {
     
     func handleDeleteSessionResponse(response: LogoutResponse?, error: Error?) -> Void {
         if error != nil {
-            showLogoutFailure()
+            let ac = ErrorAlertController.createAlertController(title: "Logout failure", message: "An error was encountered when closing the session")
         } else {
             dismiss(animated: true) {
                 OnTheMapClient.Auth.sessionId = ""
@@ -30,12 +30,6 @@ class OnTheMapTabBarController: UITabBarController {
                 OnTheMapClient.Auth.expiration = ""
             }
         }
-    }
-    
-    func showLogoutFailure() {
-        let alertVC = UIAlertController(title: "Logout failure", message: "Error encountered on deleting the session", preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        show(alertVC, sender: nil)
     }
 }
  
