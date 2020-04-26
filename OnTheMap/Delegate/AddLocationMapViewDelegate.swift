@@ -33,7 +33,9 @@ class AddLocationMapViewDelegate: NSObject, MKMapViewDelegate {
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.shared
             if let toOpen = view.annotation?.subtitle! {
-                app.open(URL(string: toOpen)!, options: [:], completionHandler: nil)
+                if toOpen != "" {
+                    app.open(URL(string: toOpen)!, options: [:], completionHandler: nil)
+                }
             }
         }
     }

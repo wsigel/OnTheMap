@@ -36,7 +36,10 @@ class AddLocationViewController: UIViewController {
     
     @IBAction func finishButtonTapped(_ sender: Any) {
         if let studentInformation = createStudentInformation() {
-            OnTheMapClient.createStudentLocation(studentInformation: studentInformation, url: OnTheMapClient.Endpoints.createStudentLocation.url, completion: handleCreateStudentLocationResponse(response:error:))
+           showActivityIndicator(show: true)
+            DispatchQueue.main.async {
+                OnTheMapClient.createStudentLocation(studentInformation: studentInformation, url: OnTheMapClient.Endpoints.createStudentLocation.url, completion: self.handleCreateStudentLocationResponse(response:error:))
+            }
         }
     }
     
@@ -44,10 +47,19 @@ class AddLocationViewController: UIViewController {
         showActivityIndicator(show: false)
         if error == nil {
             if let response = response {
-                print( response)
+                self.navigationController?.popViewController(animated: true)
             }
+        } else {
+            showGeocodingFailure(message: "Error retrieving coordinates")
         }
     }
+    
+    func showGeocodingFailure(message: String){
+        let alertVC = UIAlertController(title: "Geocoding failure", message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        show(alertVC, sender: nil)
+    }
+    
     
     func createStudentInformation() -> StudentInformation? {
         let dateFormatter = DateFormatter()
@@ -71,9 +83,6 @@ class AddLocationViewController: UIViewController {
     }
     
     @IBAction func findLocationButtonTapped(_ sender: Any) {
-//        DispatchQueue.main.async {
-//            self.showActivityIndicator(show: true)
-//        }
         self.showActivityIndicator(show: true)
         guard let locationText = self.locationTextField.text else {
             return
@@ -83,25 +92,18 @@ class AddLocationViewController: UIViewController {
             if let placemark = placemarks?.first {
                 if let locationCoordinates: CLLocationCoordinate2D = placemark.location?.coordinate {
                     self.locationCoordinates = locationCoordinates
-                    print("Breite \(locationCoordinates.longitude) / Länge \(locationCoordinates.latitude)")
-                    
-                    
                     let coordinateRegion = MKCoordinateRegion(center: locationCoordinates, span: MKCoordinateSpan(latitudeDelta: 15.0, longitudeDelta: 15.0))
                     self.addLocationMapView.setRegion(coordinateRegion, animated: true)
                     let annotation = MKPointAnnotation()
                     annotation.coordinate = locationCoordinates
                     annotation.title = OnTheMapClient.Auth.firstName + " " + OnTheMapClient.Auth.lastName
                     annotation.subtitle = self.urlTextField.text!
-                    
                     self.addLocationMapView.addAnnotation(annotation)
                     self.displayMap(showing: true)
                 }
             }
-            
-                        self.showActivityIndicator(show: false)
-                    
+            self.showActivityIndicator(show: false)
         }
-
     }
     
     func displayMap(showing: Bool){

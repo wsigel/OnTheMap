@@ -22,12 +22,31 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        DispatchQueue.main.async {
+//            self.showActivityIndicator(searching: true)
+//        }
+//        
+//        OnTheMapClient.getStudentLocations(completion: handleStudentRequest(students:error:))
+        self.mapView.delegate = studentInformationMapViewDelgate
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: Notification.Name.init(rawValue: "RefreshData"), object: nil)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         DispatchQueue.main.async {
             self.showActivityIndicator(searching: true)
         }
         
         OnTheMapClient.getStudentLocations(completion: handleStudentRequest(students:error:))
-        self.mapView.delegate = studentInformationMapViewDelgate
+    }
+    
+    @objc func refreshData(){
+        DispatchQueue.main.async {
+            self.showActivityIndicator(searching: true)
+        }
+        self.annotations = []
+        OnTheMapClient.getStudentLocations(completion: handleStudentRequest(students:error:))
     }
     
     func showActivityIndicator(searching: Bool) {
@@ -43,7 +62,7 @@ class MapViewController: UIViewController {
             self.showActivityIndicator(searching: false)
         }
         if error != nil {
-            // show error message
+            showRetrievalFailure(message: "Error retrieving Student Locations")
         } else {
             if let students = students {
                 StudentCollection.students = students.results
@@ -51,6 +70,12 @@ class MapViewController: UIViewController {
                 self.mapView.addAnnotations(self.annotations)
             }
         }
+    }
+    
+    func showRetrievalFailure(message: String) {
+        let alertVC = UIAlertController(title: "Retrieval failure", message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        show(alertVC, sender: nil)
     }
     
     func getStudentInformation() -> Void {

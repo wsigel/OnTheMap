@@ -11,6 +11,10 @@ import UIKit
 
 class OnTheMapTabBarController: UITabBarController {
     
+    @IBAction func refreshButtonTapped(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name("RefreshData"), object: nil)
+    }
+    
     @IBAction func logoutButtonTapped(_ sender: Any) {
         OnTheMapClient.deleteSession(completion: handleDeleteSessionResponse(response:error:))
     }

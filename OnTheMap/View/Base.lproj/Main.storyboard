@@ -102,7 +102,11 @@
                                     <segue destination="OCs-Pv-a7F" kind="presentation" id="vIb-mJ-U7m"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="arrow.clockwise" catalog="system" id="aZv-VP-rKT" userLabel="Refresh Bar Button Item"/>
+                            <barButtonItem image="arrow.clockwise" catalog="system" id="aZv-VP-rKT" userLabel="Refresh Bar Button Item">
+                                <connections>
+                                    <action selector="refreshButtonTapped:" destination="vA3-iR-WAQ" id="1xS-Gd-Z4j"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1f8-3H-TnG">
