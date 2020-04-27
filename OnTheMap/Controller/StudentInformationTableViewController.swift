@@ -18,7 +18,12 @@ class StudentInformationTableViewController: UITableViewController {
         super.viewDidLoad()
         self.tableView.delegate = self.studentInformationTableViewDelegate
         self.tableView.dataSource = self.studentInformationTableViewDelegate
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: Notification.Name.init(rawValue: "RefreshData"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: Notification.Name.RefreshData, object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.RefreshData, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -28,9 +28,20 @@ class LoginViewController: UIViewController {
             self.setLoggingIn(true)
         }
         
-        let body = SessionRequest(udacity: Credentials(username: loginTextField.text ?? "", password: passwordTextField.text ?? ""))
+        guard let username = loginTextField.text, let password = passwordTextField.text else {
+            return
+        }
+        
+        if username == "" || password == "" {
+            let ac = ErrorAlertController.createAlertController(title: "Missing Credentials", message: "Login and password are mandatory")
+            present(ac, animated: true)
+            DispatchQueue.main.async {
+                self.setLoggingIn(false)
+            }
+            return
+        }
+        let body = SessionRequest(udacity: Credentials(username: username, password: password))
         UdacityClient.login(body: body, completion: handleRequestSessionResponse(success:error:))
-        setLoggingIn(false)
     }
     
     func handleRequestSessionResponse(success: Bool, error: Error?) {
@@ -44,6 +55,9 @@ class LoginViewController: UIViewController {
             }
         }
         else {
+            self.passwordTextField.text = ""
+            self.loginTextField.text = ""
+            self.loginTextField.becomeFirstResponder()
             performSegue(withIdentifier: "completeLogin", sender: nil)
         }
     }

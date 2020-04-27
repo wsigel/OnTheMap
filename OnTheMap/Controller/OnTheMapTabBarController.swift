@@ -12,7 +12,7 @@ import UIKit
 class OnTheMapTabBarController: UITabBarController {
     
     @IBAction func refreshButtonTapped(_ sender: Any) {
-        NotificationCenter.default.post(name: NSNotification.Name("RefreshData"), object: nil)
+        NotificationCenter.default.post(name: Notification.Name.RefreshData, object: nil)
     }
     
     @IBAction func logoutButtonTapped(_ sender: Any) {
