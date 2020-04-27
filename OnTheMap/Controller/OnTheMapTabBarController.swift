@@ -16,18 +16,19 @@ class OnTheMapTabBarController: UITabBarController {
     }
     
     @IBAction func logoutButtonTapped(_ sender: Any) {
-        OnTheMapClient.deleteSession(completion: handleDeleteSessionResponse(response:error:))
+        UdacityClient.deleteSession(completion: handleDeleteSessionResponse(response:error:))
     }
     
     func handleDeleteSessionResponse(response: LogoutResponse?, error: Error?) -> Void {
         if error != nil {
             let ac = ErrorAlertController.createAlertController(title: "Logout failure", message: "An error was encountered when closing the session")
+            self.present(ac, animated: true, completion: nil)
         } else {
             dismiss(animated: true) {
-                OnTheMapClient.Auth.sessionId = ""
-                OnTheMapClient.Auth.registered = false
-                OnTheMapClient.Auth.key = ""
-                OnTheMapClient.Auth.expiration = ""
+                UdacityClient.Auth.sessionId = ""
+                UdacityClient.Auth.registered = false
+                UdacityClient.Auth.key = ""
+                UdacityClient.Auth.expiration = ""
             }
         }
     }

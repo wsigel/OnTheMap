@@ -21,11 +21,11 @@ class AddLocationViewController: UIViewController {
     @IBOutlet weak var addLocationMapView: MKMapView!
     
     var locationCoordinates: CLLocationCoordinate2D?
-    var addLocationMapViewDelegate: AddLocationMapViewDelegate = AddLocationMapViewDelegate()
-    
+    var studentInformationMapViewDelegate: StudentInformationMapViewDelegate = StudentInformationMapViewDelegate()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.addLocationMapView.delegate = addLocationMapViewDelegate
+        self.addLocationMapView.delegate = studentInformationMapViewDelegate
         displayMap(showing: false)
     }
     
@@ -34,11 +34,13 @@ class AddLocationViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    // MARK: create new location & post it
+    
     @IBAction func finishButtonTapped(_ sender: Any) {
         if let studentInformation = createStudentInformation() {
            showActivityIndicator(show: true)
             DispatchQueue.main.async {
-                OnTheMapClient.createStudentLocation(studentInformation: studentInformation, url: OnTheMapClient.Endpoints.createStudentLocation.url, completion: self.handleCreateStudentLocationResponse(response:error:))
+                UdacityClient.createStudentLocation(studentInformation: studentInformation, url: UdacityClient.Endpoints.createStudentLocation.url, completion: self.handleCreateStudentLocationResponse(response:error:))
             }
         }
     }
@@ -55,7 +57,7 @@ class AddLocationViewController: UIViewController {
         }
     }
     
-    
+    // MARK: build a StudentInformation used for posting
     
     func createStudentInformation() -> StudentInformation? {
         let dateFormatter = DateFormatter()
@@ -66,17 +68,19 @@ class AddLocationViewController: UIViewController {
             return nil
         }
         let studentInformation = StudentInformation(createdAt: dateString,
-                                                    firstName: OnTheMapClient.Auth.firstName,
-                                                    lastName: OnTheMapClient.Auth.lastName,
+                                                    firstName: UdacityClient.Auth.firstName,
+                                                    lastName: UdacityClient.Auth.lastName,
                                                     latitude: coordinates.latitude,
                                                     longitude: coordinates.longitude,
                                                     mapString: self.locationTextField.text!,
                                                     mediaURL: self.urlTextField.text ?? "",
                                                     objectId: "",
-                                                    uniqueKey: OnTheMapClient.Auth.key,
+                                                    uniqueKey: UdacityClient.Auth.key,
                                                     updatedAt: dateString)
         return studentInformation
     }
+    
+    // MARK: try to forward geocode from location textfield
     
     @IBAction func findLocationButtonTapped(_ sender: Any) {
         self.showActivityIndicator(show: true)
@@ -104,7 +108,7 @@ class AddLocationViewController: UIViewController {
                 self.addLocationMapView.setRegion(coordinateRegion, animated: true)
                 let annotation = MKPointAnnotation()
                 annotation.coordinate = locationCoordinates
-                annotation.title = OnTheMapClient.Auth.firstName + " " + OnTheMapClient.Auth.lastName
+                annotation.title = UdacityClient.Auth.firstName + " " + UdacityClient.Auth.lastName
                 annotation.subtitle = self.urlTextField.text!
                 self.addLocationMapView.addAnnotation(annotation)
                 self.displayMap(showing: true)
@@ -113,6 +117,7 @@ class AddLocationViewController: UIViewController {
         }
     }
     
+    // MARK: hide input controls after successful geocoding & show map
     func displayMap(showing: Bool){
         if showing {
             self.addLocationMapView.isHidden = false

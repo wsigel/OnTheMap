@@ -9,9 +9,9 @@
 import Foundation
 import MapKit
 
+// MARK: used by MapViewController + AddLocationViewController
+
 class StudentInformationMapViewDelegate: NSObject, MKMapViewDelegate {
-    
-    
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseId = "pin"

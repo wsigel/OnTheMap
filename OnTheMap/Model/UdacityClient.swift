@@ -8,14 +8,13 @@
 
 import Foundation
 
-class OnTheMapClient {
+class UdacityClient {
     
     struct Auth {
         static var sessionId = ""
         // dummy username
         static var firstName = "Frank"
         static var lastName = "Zappa"
-        static var password = ""
         static var expiration  = ""
         static var registered = false
         static var key = ""
@@ -106,7 +105,6 @@ class OnTheMapClient {
             let newData = data.subdata(in: range)
             do {
                 let responseObject = try decoder.decode(LogoutResponse.self, from: newData)
-                print(responseObject)
                 DispatchQueue.main.async {
                     completion(responseObject, nil)
                 }
@@ -130,7 +128,6 @@ class OnTheMapClient {
             let decoder = JSONDecoder()
             do {
                 let responseObject = try decoder.decode(StudentRequest.self, from: data)
-                print(responseObject)
                 DispatchQueue.main.async {
                     completion(responseObject, nil)
                 }

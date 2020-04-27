@@ -20,7 +20,7 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func signUpButtonTapped(_ sender: Any) {
-        UIApplication.shared.open(OnTheMapClient.Endpoints.signUpUdacity.url, options: [:], completionHandler: nil)
+        UIApplication.shared.open(UdacityClient.Endpoints.signUpUdacity.url, options: [:], completionHandler: nil)
     }
     
     @IBAction func loginTapped(_ sender: Any) {
@@ -29,7 +29,7 @@ class LoginViewController: UIViewController {
         }
         
         let body = SessionRequest(udacity: Credentials(username: loginTextField.text ?? "", password: passwordTextField.text ?? ""))
-        OnTheMapClient.login(body: body, completion: handleRequestSessionResponse(success:error:))
+        UdacityClient.login(body: body, completion: handleRequestSessionResponse(success:error:))
         setLoggingIn(false)
     }
     

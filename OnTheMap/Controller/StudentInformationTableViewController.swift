@@ -27,7 +27,7 @@ class StudentInformationTableViewController: UITableViewController {
     }
     
     @objc func refreshData(){
-           OnTheMapClient.getStudentLocations(completion: handleRefreshResponse(students:error:))
+           UdacityClient.getStudentLocations(completion: handleRefreshResponse(students:error:))
     }
     
     func handleRefreshResponse(students: StudentRequest?, error: Error?){

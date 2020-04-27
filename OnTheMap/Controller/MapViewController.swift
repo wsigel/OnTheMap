@@ -32,7 +32,7 @@ class MapViewController: UIViewController {
         DispatchQueue.main.async {
             self.showActivityIndicator(searching: true)
         }
-        OnTheMapClient.getStudentLocations(completion: handleStudentRequest(students:error:))
+        UdacityClient.getStudentLocations(completion: handleStudentRequest(students:error:))
     }
     
     @objc func refreshData(){
@@ -40,7 +40,7 @@ class MapViewController: UIViewController {
             self.showActivityIndicator(searching: true)
         }
         self.annotations = []
-        OnTheMapClient.getStudentLocations(completion: handleStudentRequest(students:error:))
+        UdacityClient.getStudentLocations(completion: handleStudentRequest(students:error:))
     }
     
     func showActivityIndicator(searching: Bool) {

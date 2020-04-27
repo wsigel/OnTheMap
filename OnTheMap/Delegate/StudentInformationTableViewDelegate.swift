@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+// MARK: used by StudentInformationTableViewController
+
 class StudentInformationTableViewDelegate: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
