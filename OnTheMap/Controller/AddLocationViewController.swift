@@ -52,8 +52,7 @@ class AddLocationViewController: UIViewController {
                 dismiss(animated: true, completion: nil)
             }
         } else {
-            let ac = ErrorAlertController.createAlertController(title: "Geocoding failure", message: "Error retrieving coordinates")
-            self.present(ac, animated: true, completion: nil)
+            ErrorAlertController.showAlertController(parent: self, title: "Geocoding failure", message: "Error retrieving coordinates")
         }
     }
     
@@ -94,8 +93,7 @@ class AddLocationViewController: UIViewController {
     func handleGeocodingAddressString(placemarks: [CLPlacemark]?, error: Error?) -> Void {
         self.showActivityIndicator(show: false)
         if error != nil {
-            let ac = ErrorAlertController.createAlertController(title: "Geocoding failure", message: "Unable to retrieve coordinates for given location")
-            self.present(ac, animated: true)
+            ErrorAlertController.showAlertController(parent: self, title: "Geocoding failure", message: "Unable to retrieve coordinates for given location")
         }
         guard let placemarks = placemarks else {
             return

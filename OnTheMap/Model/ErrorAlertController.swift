@@ -10,9 +10,10 @@ import Foundation
 import UIKit
 
 class ErrorAlertController {
-    class func createAlertController(title: String, message: String) -> UIAlertController{
+    
+    class func showAlertController(parent: UIViewController, title: String, message: String) {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        return alertVC
+        parent.present(alertVC, animated: true, completion: nil)
     }
 }

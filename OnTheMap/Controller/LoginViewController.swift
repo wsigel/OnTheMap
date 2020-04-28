@@ -33,8 +33,7 @@ class LoginViewController: UIViewController {
         }
         
         if username == "" || password == "" {
-            let ac = ErrorAlertController.createAlertController(title: "Missing Credentials", message: "Login and password are mandatory")
-            present(ac, animated: true)
+            ErrorAlertController.showAlertController(parent: self, title: "Missing Credentials", message: "Login and password are mandatory")
             DispatchQueue.main.async {
                 self.setLoggingIn(false)
             }
@@ -50,8 +49,7 @@ class LoginViewController: UIViewController {
         }
         if error != nil {
             if let error = error as? UdacityResponse {
-                let ac = ErrorAlertController.createAlertController(title: "Login failure", message: error.localizedDescription)
-                self.present(ac, animated: true)
+                ErrorAlertController.showAlertController(parent: self, title: "Login failure", message: error.localizedDescription)
             }
         }
         else {

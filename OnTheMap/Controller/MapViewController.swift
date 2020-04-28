@@ -61,8 +61,7 @@ class MapViewController: UIViewController {
             self.showActivityIndicator(searching: false)
         }
         if error != nil {
-            let ac = ErrorAlertController.createAlertController(title: "Retrieval failure", message: "An error occured getting student locations")
-            self.present(ac, animated: true)
+            ErrorAlertController.showAlertController(parent: self, title: "Retrieval failure", message: "An error occured getting student locations")
         } else {
             if let students = students {
                 StudentCollection.students = students.results

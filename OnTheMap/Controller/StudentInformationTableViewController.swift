@@ -37,8 +37,7 @@ class StudentInformationTableViewController: UITableViewController {
     
     func handleRefreshResponse(students: StudentRequest?, error: Error?){
         if error != nil {
-            let ac = ErrorAlertController.createAlertController(title: "Retrieval failure", message: "An error occured while refreshing student locations")
-            self.present(ac, animated: true, completion: nil)
+            ErrorAlertController.showAlertController(parent: self, title: "Retrieval failure", message: "An error occured while refreshing student locations")
         } else {
             if let students = students {
                 StudentCollection.students.removeAll()

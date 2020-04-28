@@ -21,8 +21,7 @@ class OnTheMapTabBarController: UITabBarController {
     
     func handleDeleteSessionResponse(response: LogoutResponse?, error: Error?) -> Void {
         if error != nil {
-            let ac = ErrorAlertController.createAlertController(title: "Logout failure", message: "An error was encountered when closing the session")
-            self.present(ac, animated: true, completion: nil)
+            ErrorAlertController.showAlertController(parent: self, title: "Logout failure", message: "An error was encountered when closing the session")
         } else {
             dismiss(animated: true) {
                 UdacityClient.Auth.sessionId = ""
