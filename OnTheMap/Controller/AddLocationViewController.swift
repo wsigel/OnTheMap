@@ -92,6 +92,7 @@ class AddLocationViewController: UIViewController {
     
     func handleGeocodingAddressString(placemarks: [CLPlacemark]?, error: Error?) -> Void {
         self.showActivityIndicator(show: false)
+        view.endEditing(false)
         if error != nil {
             ErrorAlertController.showAlertController(parent: self, title: "Geocoding failure", message: "Unable to retrieve coordinates for given location")
         }
