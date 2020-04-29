@@ -58,6 +58,8 @@ class LoginViewController: UIViewController {
         if error != nil {
             if let error = error as? UdacityResponse {
                 ErrorAlertController.showAlertController(parent: self, title: "Login failure", message: error.localizedDescription)
+            } else if let error = error {
+                ErrorAlertController.showAlertController(parent: self, title: "Login failure", message: error.localizedDescription)
             }
         }
         else {
