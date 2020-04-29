@@ -12,10 +12,11 @@ import UIKit
 class StudentInformationTableViewController: UITableViewController {
     
     
-    var studentInformationTableViewDelegate = StudentInformationTableViewDelegate()
+    var studentInformationTableViewDelegate: StudentInformationTableViewDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        studentInformationTableViewDelegate = StudentInformationTableViewDelegate(parent: self)
         self.tableView.delegate = self.studentInformationTableViewDelegate
         self.tableView.dataSource = self.studentInformationTableViewDelegate
         NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: Notification.Name.RefreshData, object: nil)
@@ -32,7 +33,7 @@ class StudentInformationTableViewController: UITableViewController {
     }
     
     @objc func refreshData(){
-           UdacityClient.getStudentLocations(completion: handleRefreshResponse(students:error:))
+        UdacityClient.getStudentLocations(completion: handleRefreshResponse(students:error:))
     }
     
     func handleRefreshResponse(students: StudentRequest?, error: Error?){

@@ -7,17 +7,33 @@
 //
 
 import UIKit
+import Network
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
+    let monitor = NWPathMonitor()
+    static var networkAvailable = false
+    let queue = DispatchQueue.global(qos: .background)
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                AppDelegate.networkAvailable = true
+            }
+            else {
+                AppDelegate.networkAvailable = false
+            }
+        }
+        monitor.start(queue: self.queue)
         return true
     }
-
+    
+    class func isNetworkAvailable() -> Bool {
+        return AppDelegate.networkAvailable
+    }
+    
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
@@ -32,6 +48,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-
+    func applicationWillTerminate(_ application: UIApplication) {
+        monitor.cancel()
+    }
 }
 

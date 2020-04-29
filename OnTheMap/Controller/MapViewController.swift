@@ -17,27 +17,27 @@ class MapViewController: UIViewController {
     
     var annotations = [MKPointAnnotation]()
     
-    var studentInformationMapViewDelgate: MKMapViewDelegate = StudentInformationMapViewDelegate()
-
+    //var studentInformationMapViewDelgate: MKMapViewDelegate? = StudentInformationMapViewDelegate()
+    var studentInformationMapViewDelgate: MKMapViewDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        studentInformationMapViewDelgate = StudentInformationMapViewDelegate(viewcontroller: self)
         self.mapView.delegate = studentInformationMapViewDelgate
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: Notification.Name.RefreshData, object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name:  Notification.Name.RefreshData, object: nil)
+        if !AppDelegate.isNetworkAvailable() {
+            ErrorAlertController.showAlertController(parent: self, title: "Network Connectivity", message: "There is no network available to facilitate the retrieval of student locations")
+            return
+        }
+        DispatchQueue.main.async {
+            self.showActivityIndicator(searching: true)
+        }
+        UdacityClient.getStudentLocations(completion: handleStudentRequest(students:error:))
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.RefreshData, object: nil)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        DispatchQueue.main.async {
-            self.showActivityIndicator(searching: true)
-        }
-        UdacityClient.getStudentLocations(completion: handleStudentRequest(students:error:))
     }
     
     @objc func refreshData(){

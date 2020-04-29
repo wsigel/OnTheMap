@@ -12,10 +12,18 @@ import UIKit
 class OnTheMapTabBarController: UITabBarController {
     
     @IBAction func refreshButtonTapped(_ sender: Any) {
+        if !AppDelegate.isNetworkAvailable() {
+            ErrorAlertController.showAlertController(parent: self, title: "Network Connectivity", message: "There is no network available to refresh student locations")
+            return
+        }
         NotificationCenter.default.post(name: Notification.Name.RefreshData, object: nil)
     }
     
     @IBAction func logoutButtonTapped(_ sender: Any) {
+        if !AppDelegate.isNetworkAvailable() {
+            ErrorAlertController.showAlertController(parent: self, title: "Network Connectivity", message: "There is no network available to facilitate the logout request")
+            return
+        }
         UdacityClient.deleteSession(completion: handleDeleteSessionResponse(response:error:))
     }
     

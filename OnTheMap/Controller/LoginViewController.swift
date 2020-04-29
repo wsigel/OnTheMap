@@ -20,10 +20,18 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func signUpButtonTapped(_ sender: Any) {
+        if !AppDelegate.isNetworkAvailable() {
+            ErrorAlertController.showAlertController(parent: self, title: "Network Connectivity", message: "There is no network available to facilitate the sign up request")
+            return
+        }
         UIApplication.shared.open(UdacityClient.Endpoints.signUpUdacity.url, options: [:], completionHandler: nil)
     }
     
     @IBAction func loginTapped(_ sender: Any) {
+        if !AppDelegate.isNetworkAvailable() {
+            ErrorAlertController.showAlertController(parent: self, title: "Network Connectivity", message: "There is no network available to facilitate the login request")
+            return
+        }
         DispatchQueue.main.async {
             self.setLoggingIn(true)
         }

@@ -13,6 +13,12 @@ import UIKit
 
 class StudentInformationTableViewDelegate: NSObject, UITableViewDelegate, UITableViewDataSource {
     
+    let parent: StudentInformationTableViewController?
+    
+    init(parent: StudentInformationTableViewController) {
+        self.parent = parent
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return StudentCollection.students.count
     }
@@ -27,6 +33,13 @@ class StudentInformationTableViewDelegate: NSObject, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let parent = self.parent else {
+            return
+        }
+        if !AppDelegate.isNetworkAvailable() {
+            ErrorAlertController.showAlertController(parent: parent, title:  "Network Connectivity", message: "The is no network connection available to access the URL")
+            return
+        }
         let studentInformation = StudentCollection.students[indexPath.row] as StudentInformation
         DispatchQueue.main.async {
             UIApplication.shared.open(URL(string: studentInformation.mediaURL)!, options: [:], completionHandler: nil)

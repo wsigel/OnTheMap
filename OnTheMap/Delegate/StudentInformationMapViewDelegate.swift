@@ -13,6 +13,12 @@ import MapKit
 
 class StudentInformationMapViewDelegate: NSObject, MKMapViewDelegate {
     
+    var parent: UIViewController
+    
+    init(viewcontroller: UIViewController){
+        parent = viewcontroller
+    }
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseId = "pin"
         
@@ -32,6 +38,10 @@ class StudentInformationMapViewDelegate: NSObject, MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if !AppDelegate.isNetworkAvailable() {
+            ErrorAlertController.showAlertController(parent: parent, title: "Network Connectivity", message: "Unable to open URL: no network available")
+            return
+        }
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.shared
             if let toOpen = view.annotation?.subtitle! {
@@ -42,3 +52,4 @@ class StudentInformationMapViewDelegate: NSObject, MKMapViewDelegate {
         }
     }
 }
+

@@ -21,10 +21,12 @@ class AddLocationViewController: UIViewController {
     @IBOutlet weak var addLocationMapView: MKMapView!
     
     var locationCoordinates: CLLocationCoordinate2D?
-    var studentInformationMapViewDelegate: StudentInformationMapViewDelegate = StudentInformationMapViewDelegate()
-
+    //var studentInformationMapViewDelegate: StudentInformationMapViewDelegate? = StudentInformationMapViewDelegate()
+    var studentInformationMapViewDelegate: MKMapViewDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        studentInformationMapViewDelegate = StudentInformationMapViewDelegate(viewcontroller: self)
         self.addLocationMapView.delegate = studentInformationMapViewDelegate
         displayMap(showing: false)
     }
@@ -37,6 +39,10 @@ class AddLocationViewController: UIViewController {
     // MARK: create new location & post it
     
     @IBAction func finishButtonTapped(_ sender: Any) {
+        if !AppDelegate.isNetworkAvailable() {
+            ErrorAlertController.showAlertController(parent: self, title: "Network Connectivity", message: "There is no network available to post a student location")
+            return
+        }
         if let studentInformation = createStudentInformation() {
            showActivityIndicator(show: true)
             DispatchQueue.main.async {
@@ -82,6 +88,10 @@ class AddLocationViewController: UIViewController {
     // MARK: try to forward geocode from location textfield
     
     @IBAction func findLocationButtonTapped(_ sender: Any) {
+        if !AppDelegate.isNetworkAvailable() {
+            ErrorAlertController.showAlertController(parent: self, title: "Network Connectivity", message: "There is no network available for geocoding the given location")
+            return
+        }
         self.showActivityIndicator(show: true)
         guard let locationText = self.locationTextField.text else {
             return
