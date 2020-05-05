@@ -128,19 +128,11 @@ class AddLocationViewController: UIViewController {
     
     // MARK: hide input controls after successful geocoding & show map
     func displayMap(showing: Bool){
-        if showing {
-            self.addLocationMapView.isHidden = false
-            self.finishButton.isHidden = false
-            self.findLocationButton.isHidden = true
-            self.locationTextField.isHidden = true
-            self.urlTextField.isHidden = true
-        } else {
-            self.addLocationMapView.isHidden = true
-            self.finishButton.isHidden = true
-            self.findLocationButton.isHidden = false
-            self.locationTextField.isHidden = false
-            self.urlTextField.isHidden = false
-        }
+        self.addLocationMapView.isHidden = !showing
+        self.finishButton.isHidden = !showing
+        self.findLocationButton.isHidden = showing
+        self.locationTextField.isHidden = showing
+        self.urlTextField.isHidden = showing
     }
     
     func showActivityIndicator(show: Bool) -> Void {
